@@ -12,8 +12,9 @@ logging.basicConfig(filename=LOGFILE, level=logging.DEBUG, format='%(asctime)s %
 
 class MyDaemon(Daemon):
     def run(self):
+        r_server = redis.Redis('localhost')
         while True:
-            pass
+            notif = r_server.lpop("notifyq")
 
 
 

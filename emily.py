@@ -1,6 +1,7 @@
 import time
 import picamera
 from PIL import Image
+import redis
 
 
 def recordVideo(filename):
@@ -39,8 +40,14 @@ def checkTamper(filename):
     else:
         return 0
 
+r_server = redis.Redis('localhost')
 
 filename = "evid-" + time.strftime("%d%m%Y-%H%M%S")
 recordVideo(filename)
 if checkTamper(filename) == 1:
     print "BLOW SIREN"
+
+r_server.rpush("notifyq", filename + '.jpg')
+r_server.rpush("storeq", filename + '.h264')
+
+
