@@ -17,7 +17,8 @@ def recordVideo(filename):
 def checkTamper(filename):
     im = Image.open("../image-records/" + filename + '.jpg')
     pxarray = im.getdata()
-    print pxarray
+    for px in pxarray:
+        print px
 
 
 filename = "evid-" + time.strftime("%d%m%Y-%H%M%S")
