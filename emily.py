@@ -1,5 +1,6 @@
 import time
 import picamera
+from PIL import Image
 
 
 def recordVideo(filename):
@@ -13,6 +14,12 @@ def recordVideo(filename):
         camera.wait_recording(5)
         camera.stop_recording()
 
+def checkTamper(filename):
+    im = Image.open("../image-records/" + filename + '.jpg')
+    pxarray = im.getdata()
+    print pxarray
+
 
 filename = "evid-" + time.strftime("%d%m%Y-%H%M%S")
 recordVideo(filename)
+checkTamper(filename)
