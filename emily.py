@@ -6,6 +6,9 @@ from PIL import Image
 def recordVideo(filename):
     with picamera.PiCamera() as camera:
         camera.resolution = (320, 240)
+        # PiCamera setting 
+        # - https://www.raspberrypi.org/documentation/usage/camera/python/README.md
+        # - http://picamera.readthedocs.org/en/latest/api_camera.html
         camera.vflip = True
         camera.exposure_mode = 'night'
         camera.meter_mode = 'average'
